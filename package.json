@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/satyampgt4/Table_Collection/issues"
   },
-  "homepage": "https://github.com/satyampgt4/Table_Collection#readme"
+  "homepage": "https://github.com/satyampgt4/Table_Collection#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1"
+  }
 }
