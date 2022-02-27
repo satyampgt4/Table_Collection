@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = require("./Router/router");
-const db = require("./Database/databse");
+const db = require("./Database/database");
 const port = process.env.PORT || 5000;
 global.db = db;
 
