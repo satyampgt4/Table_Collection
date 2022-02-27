@@ -18,6 +18,7 @@
   "homepage": "https://github.com/satyampgt4/Table_Collection#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "firebase": "^9.6.7",
     "mysql": "^2.18.1"
   }
 }
