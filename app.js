@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const app = require("./Router/router");
 const db = require("./Database/database");
+const dotenv = require('dotenv');
+dotenv.config();
+
 const port = process.env.PORT || 5000;
 global.db = db;
 
