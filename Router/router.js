@@ -11,9 +11,11 @@ app.use(session({
 }));
 
 const { dashboard } = require("./Routes/user");
+const  {login} = require("./Routes/auth")
 // routes for the app
 //GET
-
+app.get("/dashboard ", dashboard);
+app.get("/login", login);
 app.get("/", dashboard);
 
 
