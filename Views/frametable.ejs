@@ -1,0 +1,74 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Create New Tabel</h1>
+            <div class="form-group col-md-1">
+                <a href="/createtable" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <% if (noOfColumn> 0) {%>
+            <form class="form-group " action="/create" method="POST">
+                <table class="table table-hovered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Column Name </th>
+                            <th scope="col">Data Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=1; i <=noOfColumn; i++ ) { %>
+                            <tr>
+                                <% if (i==1) {%>
+                                    
+                                    <th scope="row">
+                                        <label for="colname<%= i %>">Primary Key</label>
+                                        <input type="text" class="form-control" name="colname<%= i %>"
+                                            id="colname<%= i %>" placeholder="Name" required>
+                                    </th>
+                                    <td>
+                                        <select id="coltype<%= i %>" name="coltype<%= i %>" class="form-control
+                                            " style="margin-top: 31px;"
+                                            placeholder="Choose Type" required>
+                                            <option selected disabled>Choose Type</option>
+                                            <option value="VARCHAR (20)">String</option>
+                                            <option value="INT">Number</option>
+                                            <option value="BIT">Boolean</option>
+                                            <option value="datetime">Datetime</option>
+                                        </select>
+                                    </td>
+                                    <% } else { %>
+                                        <th scope="row">
+                                            <label for="colname<%= i %>" hidden></label>
+                                            <input type="text" class="form-control" name="colname<%= i %>"
+                                                id="colname<%= i %>" placeholder="Name" required>
+                                        </th>
+                                        <td>
+                                            <select id="coltype<%= i %>" name="coltype<%= i %>" class="form-control"
+                                                placeholder="Choose Type" required>
+                                                <option selected disabled>Choose Type</option>
+                                                <option value="VARCHAR (20)">String</option>
+                                                <option value="INT">Number</option>
+                                                <option value="BIT">Boolean</option>
+                                                <option value="datetime">Datetime</option>
+                                            </select>
+                                        </td>
+                                        <% } %>
+                                            
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+                <button type="submit" class=" mx-md-5 mb-md-4 btn btn-success float-right" formaction="/create">Create
+                    Table</button>
+            </form>
+            <% } else { %>
+                <p class="text-center">INVALID INPUT
+                    <% } %>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
