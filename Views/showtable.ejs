@@ -1,0 +1,50 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Show All</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <% if (table.length> 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <% tableheader.forEach((header, index)=> { %>
+                        <th scope="col"><%= header.colname %></th>
+                        <% }) %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% table.forEach((table, index)=> { %>
+                        <tr>
+                            <% table.forEach((header, index)=> { %>
+                            <th scope="row">
+                                <%= table <%= header.colname> %>
+                            </th>
+                            <% }) %>
+                            
+                                        <form class="form-group col-md-10" action="/edit" method="POST">
+                                            <input type="text" class="form-control" name="acno" id="acnoi"
+                                                value="<%= account.acno %>" style="display: none;">
+                                            <button type="submit" class="btn btn-sm btn-success btn-block">Edit</button>
+                                        </form>
+                        
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+                <% } %>
+            <div class="form-group col-md-1">
+                    <a href="/addnewrow" class="mx-md-5 mb-md-4 btn btn-success float-right">Add New Row</a>
+            </div>
+
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
