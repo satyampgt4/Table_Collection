@@ -11,10 +11,16 @@ app.use(session({
 }));
 
 const { dashboard } = require("./Routes/user");
+const { frametable,createtable } = require("./Routes/table");
 // routes for the app
 //GET
 
 app.get("/", dashboard);
+app.get("/dashboard", dashboard);
 
+app.get("/createtable", createtable);
+
+
+app.post("/createtable",frametable)
 
 module.exports = app;
