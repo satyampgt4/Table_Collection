@@ -1,0 +1,31 @@
+<%- include ('partials/header.ejs'); -%>
+
+
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Add New Row</h1>
+            <div class="form-group col-md-1">
+                <a href="/showtabel" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+
+        <form class="add-account-form" method="POST" action="">
+            <% tableheader.forEach((header, index)=> { %>
+            <div class="form-group col-md-4">
+                <label for="first-name"><%= header.colname %></label>
+                <<% if (header.datatype=="VARCHAR"){%>
+                <input type="text" class="form-control" name="<%= header.colname %>" id="<%= header.colname %>" placeholder="<%= header.colname %>"
+                    required>
+                
+            </div>
+            <div class="form-row mb-md-4 justify-content-between">
+                <button type="reset" class="btn btn-primary float-left">Reset</button>
+                <button type="submit" class="btn btn-primary float-right">Add Account</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
