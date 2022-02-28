@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/satyampgt4/Table_Collection#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cookies": "^0.8.0",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "firebase": "^9.6.7",
+    "google-auth-library": "^7.14.0",
     "mysql": "^2.18.1"
   }
 }
