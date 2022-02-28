@@ -1,19 +1,17 @@
 <%- include ('Partials/header.ejs'); -%>
-    <div class="table-wrapper row  justify-content-center">
-        <div class="table-wrapper col-md-8  ">
-            <div class="form-row justify-content-center">
-                <div class="form-group col-md-5">
-                    <a href="/createnewtable/" class="btn btn-block btn-success">Create New Table</a>
-                </div>
+    <div class=" container">
+        <div class="row align-items-start">
+            <div class="col">
+                <a href="/createtable/" class=" dash btn btn-block btn-success">Create New Table <i class="fa-solid fa-square-plus"></i></a>
             </div>
-
-            <div class="form-row justify-content-center">
-                <div class="form-group col-md-5">
-                    <a href="/showalltable" class="btn btn-block btn-success">My Table</a>
-                </div>
+            <i class="fa-solid fa-square-plus"></i>
+            <div class="col">
+                <a href="/showalltable" class=" dash btn btn-block btn-success">My Table <i class="fa-regular fa-table"></i></a>
             </div>
-
         </div>
+
+
+    </div>
     </div>
     </div>
     <%- include ('Partials/footer.ejs'); -%>
