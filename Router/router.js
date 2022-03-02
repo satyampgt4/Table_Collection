@@ -21,7 +21,7 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-const { dashboard,showalltable,showtable,filter } = require("./Routes/user");
+const { dashboard,showalltable,showtable,filter,showfilter } = require("./Routes/user");
 const  {login,logout} = require("./Routes/auth")
 const { frametable,createtable,generatetable } = require("./Routes/newtable");
 const  {addnewrow,verifynewrow,editrow,verifyedit} = require("./Routes/table");
@@ -54,7 +54,7 @@ app.post("/filter",checkAuthenticated,filter);
 app.post("/frametable",checkAuthenticated,generatetable);
 app.post("/edit",checkAuthenticated,editrow);
 app.post("/verifyedit",checkAuthenticated,verifyedit);
-
+app.post("/showfilter",checkAuthenticated,showfilter);
     
   
   
