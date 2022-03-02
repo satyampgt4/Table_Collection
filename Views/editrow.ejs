@@ -1,0 +1,60 @@
+<%- include ('partials/header.ejs'); -%>
+
+
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>Edit Row</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+        <% row.forEach((rowval, index)=> { %>
+            <form class="add-account-form" method="POST" action="/verifyedit">
+                <% tableheader.forEach((header, index)=> { %>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="first-name">
+                                <%= header.Field %>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <% if (header.Type=="varchar(50)" ) {%>
+                                <input type="text" class="form-control" name="<%= header.Field %>"
+                                    id="<%= header.Field %>" placeholder="<%= header.Field %>"
+                                    value="<%= rowval[header.Field] %>" required>
+                                <% } else if (header.Type=="varchar(51)" ) {%>
+                                    <input type="email" class="form-control" name="<%= header.Field %>"
+                                        id="<%= header.Field %>" value="<%= rowval[header.Field] %>" required>
+                                    <% } else if (header.Type=="date" ) {%>
+                                        <input type="date" class="form-control" name="<%= header.Field %>"
+                                            id="<%= header.Field %>" placeholder="<%= header.Field %>" required>
+                                        <% } else if (header.Type=="tinyint(1)" ) {%>
+                                            <input type="number" class="form-control" name="<%= header.Field %>" min="0"
+                                                max="1" id="<%= header.Field %>" placeholder="<%= header.Field %>"
+                                                value="<%= rowval[header.Field] %>" required>
+                                            <% } else if (header.Type=="int" ) {%>
+                                                <input type="number" class="form-control" name="<%= header.Field %>"
+                                                    int="<%= header.Field %>" placeholder="<%= header.Field %>"
+                                                    value="<%= rowval[header.Field] %>" required>
+                                                <% } %>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% }); %>
+                            <input type="text" class="form-control " name="tablename" action="/verifyedit"
+                                value="<%= tname %>" style="display: none;" hidden>
+                            <input type="text" class="form-control " name="primary_key" action="/verifyedit"
+                                value="<%= prikey %>" style="display: none;" hidden>
+                            <input type="text" class="form-control " name="primary_value" action="/verifyedit"
+                                value="<%= prival %>" style="display: none;" hidden>
+                            <div class="form-row mb-md-4 justify-content-between">
+                                <button type="reset" class="btn btn-primary float-left">Reset</button>
+                                <button type="submit" class="btn btn-primary float-right" action>Edit Row</button>
+                            </div>
+
+            </form>
+    </div>
+    </div>
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
