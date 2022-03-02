@@ -11,6 +11,7 @@ const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = process.env.CLIENT_ID
 const client = new OAuth2Client(CLIENT_ID);
 
+
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -26,15 +27,6 @@ app.use(express.json()); // parse form data client
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, "public"))); // configure express to use public folder
 app.use(express.static('public'));
-
-
-app.get('/', (req, res)=>{
-  res.render('index')
-})
-
-app.get('/login',(req,res)=>{
-  res.render('login') 
-})
 
 app.post('/login', (req, res)=>{
   let token = req.body.token;
