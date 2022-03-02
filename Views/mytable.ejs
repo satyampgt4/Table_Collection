@@ -1,0 +1,26 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <div class="form-row justify-content-between">
+            <h1>My Table</h1>
+            <div class="form-group col-md-1">
+                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper row  justify-content-center">
+        <div class="table-wrapper ">
+            <% tables.forEach((table, index)=> { %>
+                <form class="form-group col-md-10 " action="" method="POST">
+                    <input type="text" class="form-control " name="tablename" id="acnoi"
+                        value="<%= table.tablename %>" style="display: none;" hidden>
+                    <button type="submit" class=" my-table btn btn-sm btn-success btn-block"><%= table.tablename %></button>
+                </form>
+                <% }) %>
+        </div>
+    </div>
+    </div>
+
+    <%- include ('partials/footer.ejs'); -%>
+        </body>
+
+        </html>
