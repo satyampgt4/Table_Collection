@@ -43,7 +43,7 @@ module.exports = {
                 if (err) {
                     return res.status(200).send(err);
                 }
-                console.log(result);
+                // console.log(result);
                 res.redirect("/mytable");
             });
         });
@@ -53,14 +53,14 @@ module.exports = {
     },
     addnewrow: (req, res) => {
         let tablename = req.body.tablename;
-        console.log(tablename);
+        // console.log(tablename);
         let query = `DESCRIBE ${tablename};`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
                 console.log(err)
             }
-            console.log(result);
+            // console.log(result);
             header = result;
         });
     },
