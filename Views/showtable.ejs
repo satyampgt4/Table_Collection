@@ -16,46 +16,54 @@
                             <%= header.Field %>
                         </th>
                         <% }) %>
-                        <th scope="col">
-                            Action
-                        </th>
+                            <th scope="col">
+                                Action
+                            </th>
                 </tr>
             </thead>
             <tbody>
                 <% table.forEach((table, index)=> { %>
                     <tr>
                         <form class="form-group col-md-10" action="/edit" method="POST">
-                                <input type="text" class="form-control " name="tablename" id="acnoi"
-                                        value="<%= tname %>" style="display: none;" hidden>
-                        <% tableheader.forEach((header, index)=> { %>
-                            <td scope="row">
-                                
-                                        <% if(index==0) {%>  
-                                    <input type="text" class="form-control " name="primary_key" 
-                                    value="<%= header.Field %>" style="display: none;" hidden>          
-                                    <input type="text" class="<%= header.Field %>" name="primary_value" 
-                                    value="<%= table[header.Field] %>">
-                                    
-                                    <% } else {%>
-                                    <input type="text" class="<%= header.Field %>" name="<%= header.Field %>" id="acnoi"
-                                    value="<%= table[header.Field] %>" disabled title="use edit button to edit." >
-                                    <% } %>
-                            </td>
-                            <% }) %>
-                                <td>
-                                    <button type="submit" class=" edit btn btn-sm btn-success btn-block">Edit</button>
+                            <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
+                                style="display: none;" hidden>
+                            <% tableheader.forEach((header, index)=> { %>
+                                <td scope="row">
+
+                                    <% if(index==0) {%>
+                                        <input type="text" class="form-control " name="primary_key"
+                                            value="<%= header.Field %>" style="display: none;" hidden >
+                                        <input type="text" class="<%= header.Field %>" name="primary_value"
+                                            value="<%= table[header.Field] %>" style="display: none;" hidden >
+                                         <% } %>
+                                            <input type="text" class="<%= header.Field %>" name="<%= header.Field %>"
+                                                id="acnoi" value="<%= table[header.Field] %>" disabled
+                                                title="use edit button to edit.">
+                                           
                                 </td>
-                                </form>
-                                </td>
+                                <% }) %>
+                                    <td>
+                                        <button type="submit"
+                                            class=" edit btn btn-sm btn-success btn-block">Edit</button>
+                                    </td>
+                        </form>
+                        </td>
 
                     </tr>
                     <% }) %>
             </tbody>
         </table>
         <div class="container">
-            <div class="form-row justify-content-center">
+            <div class="form-row justify-content-between">
                 <form class="form-group  " action="/addnewrow" method="POST">
+                    <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
+                        style="display: none;" hidden>
                     <button type="submit" class=" my-table btn btn-sm btn-success btn-block">+Add New Row</button>
+                </form>
+                <form class="form-group  " action="/filter" method="POST">
+                    <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
+                        style="display: none;" hidden>
+                    <button type="submit" class=" my-table btn btn-sm btn-success btn-block">Filter</button>
                 </form>
             </div>
         </div>
