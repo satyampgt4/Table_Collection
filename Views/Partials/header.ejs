@@ -45,6 +45,14 @@
     margin-bottom: 90px;
     margin-top: 50px;
 }
+.my-table{
+    height: 50px;
+    width: 290px;
+}
+.edit
+{
+  margin-top: 18px;
+}
   body {
     overflow-x: hidden;
     min-height: 100%;
@@ -63,7 +71,7 @@
         <% if (user!='Guest' ) { %>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="/dashboard">Dashboard</a>
-            <a class="dropdown-item" href="/logout">Log Out</a>
+            <a class="dropdown-item" onclick="signOut()">Sign out</a>
           </div>
           <% } %>
 
@@ -85,4 +93,11 @@
 
 </body>
 
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+    });
+  }
+</script> 
 </html>
