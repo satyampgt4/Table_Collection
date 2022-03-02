@@ -45,7 +45,7 @@ module.exports = {
             if (err) {
               console.log(err)
             }
-            console.log(header);
+            // console.log(header);
             // console.log(result);
             res.render("showtable.ejs", {
                 title: "Welcome to Table collection",
@@ -57,5 +57,23 @@ module.exports = {
                 
               });
         });
+    },
+    filter : (req, res) => {
+      let tablename = req.body.tablename;
+      let query = `DESCRIBE ${tablename};`;
+      // console.log(tablename);
+      db.query(query, (err, result) => {
+        if (err) {
+          console.log(err)
+        }
+        res.render("filter.ejs", {
+          title: "Welcome to Table collection",
+          user: req.user.name,
+          message: "",
+          tableheader: result,
+          tname: tablename,
+        });
+
+      });
     },
 };
