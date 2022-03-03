@@ -36,8 +36,8 @@ const  {addnewrow,verifynewrow,editrow,verifyedit} = require("./Routes/table");
 // });
 
 //GET
-app.get("/login", dashboard);
-app.get("/",checkAuthenticated, login);
+app.get("/login", login);
+app.get("/", login);
 app.get("/dashboard",checkAuthenticated, dashboard);
 app.get("/createtable",checkAuthenticated, createtable);
 app.get("/mytable",checkAuthenticated, showalltable);
