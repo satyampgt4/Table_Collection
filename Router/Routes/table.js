@@ -2,7 +2,7 @@ module.exports = {
 
   addnewrow: (req, res) => {
     let tablename = req.body.tablename;
-    let query = `DESCRIBE "${tablename}";`;
+    let query = `DESCRIBE ${tablename};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
@@ -19,16 +19,16 @@ module.exports = {
   verifynewrow: (req, res) => {
     let tablename = req.body.tablename;
     let user_name = req.user.name;
-    query = `DESCRIBE "${tablename}";`;
+    query = `DESCRIBE ${tablename};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
       }
 
       let i = 1;
-      query = `INSERT INTO "${tablename}" (`;
+      query = `INSERT INTO ${tablename} (`;
       result.forEach((header, index) => {
-        query = query + ` "${header.Field}" ,`
+        query = query + ` ${header.Field} ,`
       });
       let lastIndex = query.lastIndexOf(",");
 
@@ -61,13 +61,13 @@ module.exports = {
     let primarykey = req.body.primary_key;
     let primaryvalue = req.body.primary_value;
     let user_name = req.user.name;
-    let query = `DESCRIBE "${tablename}";`;
+    let query = `DESCRIBE ${tablename};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
       }
       let header = result;
-      query = `SELECT * FROM "${tablename}" WHERE "${primarykey}" = "${primaryvalue}"`
+      query = `SELECT * FROM ${tablename} WHERE ${primarykey} = "${primaryvalue}"`
       db.query(query, (err, result) => {
         if (err) {
           console.log(err)
@@ -92,21 +92,21 @@ module.exports = {
     let primarykey = req.body.primary_key;
     let primaryvalue = req.body.primary_value;
 
-    query = `DESCRIBE "${tablename}";`;
+    query = `DESCRIBE ${tablename};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
       }
 
-      query = `UPDATE "${tablename}"  SET `;
+      query = `UPDATE ${tablename}  SET `;
       
       result.forEach((header, index) => {
-        query = query + `"${header.Field}" = "${req.body[header.Field]}",`
+        query = query + `${header.Field} = "${req.body[header.Field]}",`
       });
       lastIndex = query.lastIndexOf(",");
       query = query.substring(0, lastIndex);
 
-      query = query + `WHERE "${primarykey}" = "${primaryvalue}" ;`;
+      query = query + `WHERE ${primarykey} = "${primaryvalue}" ;`;
 
       db.query(query, (err, result) => {
         if (err) {

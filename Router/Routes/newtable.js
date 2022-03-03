@@ -1,5 +1,13 @@
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+  
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+  }
 module.exports = {
 
+    
     createtable: (req, res) => {
         // console.log(req);
         res.render("createtable.ejs", {
@@ -11,7 +19,8 @@ module.exports = {
     frametable: (req, res) => {
 
         const noc = req.body.nofcolumn;
-        const name = req.body.nameoftable;
+        let name = req.body.nameoftable;
+        name = replaceAll(name," ", "_");
         res.render("frametable.ejs", {
             title: "Welcome to Table Collection",
             user: req.user.name,
@@ -23,15 +32,20 @@ module.exports = {
     },
     generatetable: (req, res) => {
 
-        let query = `CREATE TABLE "${req.body.nameoftable}" (`;
+
+        let query = `CREATE TABLE ${req.body.nameoftable} (`;
 
         for (let i = 1; i <= req.body.nofcolumn; i++) {
             let s = `colname${i}`;
             let r = `coltype${i}`;
-            query = query + `"${req.body[s]}"  ${req.body[r]} ,`;
+            let head = `${req.body[s]}`;
+            head = replaceAll(head," ", "_");
+            query = query + ` ${head}  ${req.body[r]} ,`;
             
         }
-        query = query + `PRIMARY KEY ( "${req.body["colname1"]}"));`;
+            head = `${req.body["colname1"]}`;
+            head = replaceAll(head," ", "_");
+        query = query + `PRIMARY KEY ( ${head}));`;
 
         db.query(query, (err, result) => {
             if (err) {
@@ -54,7 +68,7 @@ module.exports = {
     addnewrow: (req, res) => {
         let tablename = req.body.tablename;
         // console.log(tablename);
-        let query = `DESCRIBE "${tablename}";`;
+        let query = `DESCRIBE ${tablename};`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
