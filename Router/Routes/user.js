@@ -139,7 +139,7 @@ module.exports = {
                 }
                 else if(obj[`${s}`] == "endwith")
                 {
-                  query = query + ` ${header.Field} LIKE  "%${obj[`${r}`]}' AND `;
+                  query = query + ` ${header.Field} LIKE  "%${obj[`${r}`]}" AND `;
                 }
                 else if(obj[`${s}`] == "contain")
                 {
@@ -147,7 +147,7 @@ module.exports = {
                 }
                 else if(obj[`${s}`] == "notcontain")
                 {
-                  query = query + ` ${header.Field}  NOT LIKE  "%${obj[`${r}`]}' AND `;
+                  query = query + ` ${header.Field}  NOT LIKE  "%${obj[`${r}`]}" AND `;
                 } 
                  
             }

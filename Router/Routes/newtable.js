@@ -65,18 +65,18 @@ module.exports = {
 
 
     },
-    addnewrow: (req, res) => {
-        let tablename = req.body.tablename;
-        // console.log(tablename);
-        let query = `DESCRIBE ${tablename};`;
-        let header = {};
-        db.query(query, (err, result) => {
-            if (err) {
-                console.log(err)
-            }
-            // console.log(result);
-            header = result;
-        });
-    },
+    // addnewrow: (req, res) => {
+    //     let tablename = req.body.tablename;
+    //     // console.log(tablename);
+    //     let query = `DESCRIBE ${tablename};`;
+    //     let header = {};
+    //     db.query(query, (err, result) => {
+    //         if (err) {
+    //             console.log(err)
+    //         }
+    //         // console.log(result);
+    //         header = result;
+    //     });
+    // },
 
 };
