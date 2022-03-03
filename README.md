@@ -56,8 +56,9 @@ EJS,
 - Back-End : 
 NODEJS,Firebase,Mysql
 - Other tools and platforms : <br>
-i) Balsamiq cloud tool to design wireframe 
-ii) AWS RDS 
+i) Balsamiq cloud tool to design wireframe<br>
+ii) Used Heroku for deployment <br>
+iii) AWS RDS <br>
 
 ## Contributors:
 
