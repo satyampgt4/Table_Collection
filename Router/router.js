@@ -80,7 +80,7 @@ app.post("/showfilter",checkAuthenticated,showfilter);
       })
       .catch(err=>{
         // console.log(err);
-          res.redirect('/login');
+          // res.redirect('/login');
       })
   
   }
