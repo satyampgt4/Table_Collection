@@ -16,6 +16,7 @@ module.exports = {
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
+              res.redirect('/dashboard');
             }
             res.render("mytable.ejs", {
               title: "Welcome to Table Collection View Account",
@@ -44,6 +45,7 @@ module.exports = {
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
+              res.redirect('/mytable');
             }
             // console.log(header);
             console.log(result);
@@ -160,6 +162,7 @@ module.exports = {
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
+              res.redirect('/mytable');
             }
             // console.log(header);
             console.log(result);

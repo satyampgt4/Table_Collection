@@ -23,6 +23,7 @@ module.exports = {
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
+        res.redirect('/mytable');
       }
 
       let i = 1;
@@ -48,6 +49,7 @@ module.exports = {
       db.query(query, (err, result) => {
         if (err) {
           console.log(err)
+          res.redirect('/mytable');
         }
         res.redirect('/mytable');
       });
@@ -71,6 +73,7 @@ module.exports = {
       db.query(query, (err, result) => {
         if (err) {
           console.log(err)
+          res.redirect('/mytable');
         }
         
         res.render("editrow.ejs", {
@@ -111,6 +114,7 @@ module.exports = {
       db.query(query, (err, result) => {
         if (err) {
           console.log(err)
+          res.redirect('/mytable');
         }
         res.redirect('/mytable');
       });
