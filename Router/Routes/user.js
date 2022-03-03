@@ -3,7 +3,7 @@ module.exports = {
     dashboard: (req, res) => {
         // console.log(req.user);
         res.render("dashboard.ejs", {
-            title: "Welcome to Panna Bank View Account",
+            title: "Welcome to Table Collection View Account",
             user : req.user.name,
             message : ""
           });
@@ -18,7 +18,7 @@ module.exports = {
               console.log(err)
             }
             res.render("mytable.ejs", {
-              title: "Welcome to Panna Bank View Account",
+              title: "Welcome to Table Collection View Account",
               tables: result,
               user: req.user.name,
               message: "",
@@ -31,7 +31,7 @@ module.exports = {
         
         let tablename = req.body.tablename;
         // console.log(tablename);
-        let query = `DESCRIBE ${tablename};`;
+        let query = `DESCRIBE "${tablename}";`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
@@ -40,7 +40,7 @@ module.exports = {
             // console.log(result);
             header = result;
         });
-         query = `SELECT *  FROM  ${tablename};`;
+         query = `SELECT *  FROM  "${tablename}";`;
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
@@ -60,7 +60,7 @@ module.exports = {
     },
     filter : (req, res) => {
       let tablename = req.body.tablename;
-      let query = `DESCRIBE ${tablename};`;
+      let query = `DESCRIBE "${tablename}";`;
       // console.log(tablename);
       db.query(query, (err, result) => {
         if (err) {
@@ -80,7 +80,7 @@ module.exports = {
       let tablename = req.body.tablename;
       let user_name = req.user.name;
       console.log(req.body);
-      let query = `DESCRIBE ${tablename};`;
+      let query = `DESCRIBE "${tablename}";`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
@@ -90,7 +90,7 @@ module.exports = {
             header = result;       
   
         let i = 1;
-        query = `SELECT * FROM ${tablename} WHERE`;
+        query = `SELECT * FROM "${tablename}" WHERE`;
       let obj = req.body;
       // console.log(object["strop"]);
         result.forEach((header, index) => {
@@ -101,53 +101,53 @@ module.exports = {
           {
             if(obj[`${s}`]=="null")
             {
-              query = query + ` ${header.Field} IS NULL AND `;
+              query = query + ` "${header.Field}" IS NULL AND `;
             }
             else if (obj[`${s}`]=="notnull")
             {
-              query = query + ` ${header.Field} IS NOT NULL AND `;
+              query = query + ` "${header.Field}" IS NOT NULL AND `;
             }
             else if (obj[`${s}`] == "true")
             {
-              query = query + ` ${header.Field}  =  "1" AND `;
+              query = query + ` "${header.Field}"  =  "1" AND `;
             } 
             else if (obj[`${s}`] == "false")
             {
-              query = query + ` ${header.Field}  =  "0" AND `;
+              query = query + ` "${header.Field}"  =  "0" AND `;
             }
             else if(obj[`${r}`] != "")
             {
                 if(obj[`${s}`] == "iseq")
                 {
-                  query = query + ` ${header.Field} =  "${obj[`${r}`]}" AND `;
+                  query = query + ` "${header.Field}" =  "${obj[`${r}`]}" AND `;
                 }
                 else if(obj[`${s}`] == "noteq")
                 {
-                  query = query + ` ${header.Field} !=  "${obj[`${r}`]}" AND `;
+                  query = query + ` "${header.Field}" !=  "${obj[`${r}`]}" AND `;
                 }
                 else if(obj[`${s}`] == "greater")
                 {
-                  query = query + ` ${header.Field} >  ${obj[`${r}`]} AND `;
+                  query = query + ` "${header.Field}" >  ${obj[`${r}`]} AND `;
                 }
                 else if(obj[`${s}`] == "lesser")
                 {
-                  query = query + ` ${header.Field} <  ${obj[`${r}`]} AND `;
+                  query = query + ` "${header.Field}" <  ${obj[`${r}`]} AND `;
                 }
                 else if(obj[`${s}`] == "startswith")
                 {
-                  query = query + ` ${header.Field} LIKE  "${obj[`${r}`]}%" AND `;
+                  query = query + ` "${header.Field}" LIKE  "${obj[`${r}`]}%" AND `;
                 }
                 else if(obj[`${s}`] == "endwith")
                 {
-                  query = query + ` ${header.Field} LIKE  "%${obj[`${r}`]}" AND `;
+                  query = query + ` "${header.Field}" LIKE  "%${obj[`${r}`]}" AND `;
                 }
                 else if(obj[`${s}`] == "contain")
                 {
-                  query = query + ` ${header.Field} LIKE  "%${obj[`${r}`]}%" AND `;
+                  query = query + ` "${header.Field}" LIKE  "%${obj[`${r}`]}%" AND `;
                 }
                 else if(obj[`${s}`] == "notcontain")
                 {
-                  query = query + ` ${header.Field}  NOT LIKE  "%${obj[`${r}`]}" AND `;
+                  query = query + ` "${header.Field}"  NOT LIKE  "%${obj[`${r}`]}" AND `;
                 } 
                  
             }

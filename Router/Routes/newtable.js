@@ -23,15 +23,15 @@ module.exports = {
     },
     generatetable: (req, res) => {
 
-        let query = "CREATE TABLE " + req.body.nameoftable + " (";
+        let query = `CREATE TABLE "${req.body.nameoftable}" (`;
 
         for (let i = 1; i <= req.body.nofcolumn; i++) {
             let s = `colname${i}`;
             let r = `coltype${i}`;
-
-            query = query + req.body[s] + " " + req.body[r] + ",";
+            query = query + `"${req.body[s]}"  ${req.body[r]} ,`;
+            
         }
-        query = query + `PRIMARY KEY ( ${req.body["colname1"]} ));`;
+        query = query + `PRIMARY KEY ( "${req.body["colname1"]}"));`;
 
         db.query(query, (err, result) => {
             if (err) {
@@ -54,7 +54,7 @@ module.exports = {
     addnewrow: (req, res) => {
         let tablename = req.body.tablename;
         // console.log(tablename);
-        let query = `DESCRIBE ${tablename};`;
+        let query = `DESCRIBE "${tablename}";`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
