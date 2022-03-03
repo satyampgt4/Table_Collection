@@ -35,7 +35,8 @@ app.post('/login', (req, res)=>{
   async function verify() {
     const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+            audience: CLIENT_ID,
+            redirect_uri: "https://table-collection.herokuapp.com/"   // Specify the CLIENT_ID of the app that accesses the backend
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
