@@ -36,7 +36,7 @@ const  {addnewrow,verifynewrow,editrow,verifyedit} = require("./Routes/table");
 // });
 
 //GET
-app.get("/login",checkAuthenticated, dashboard);
+app.get("/login", dashboard);
 app.get("/",checkAuthenticated, login);
 app.get("/dashboard",checkAuthenticated, dashboard);
 app.get("/createtable",checkAuthenticated, createtable);
@@ -79,11 +79,9 @@ app.post("/showfilter",checkAuthenticated,showfilter);
           next();
       })
       .catch(err=>{
-        // console.log(err);
-          // res.redirect('/login');
+        console.log(err);
+          res.redirect('/login');
       })
   
   }
-
-
 module.exports = app;
