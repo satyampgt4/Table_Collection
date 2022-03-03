@@ -1,25 +1,28 @@
-// const mysql = require("mysql");
-// const dotenv = require('dotenv');
-// dotenv.config();
+const mysql = require("mysql");
+const dotenv = require('dotenv');
+const { timeout } = require("nodemon/lib/config");
+dotenv.config();
 
-// console.log(process.env.DB_DATABASE);
+const db = mysql.createConnection({
+  host:process.env.DB_HOST,
 
-// const db = mysql.createConnection({
-//   host:process.env.DB_HOST,
+  user:process.env.DB_USER,
 
-//   user:process.env.DB_USER,
+  password:process.env.DB_PASSWORD,
 
-//   password:process.env.DB_PASSWORD,
+  database:process.env.DB_DATABASE,
+  
+  port:process.env.DB_PORT,
+  
+});
 
-//   database:process.env.DB_DATABASE,
-// });
 
-// // create connection to database
-// // the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
+// create connection to database
+// the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
 
-// db.connect((err) => {
-//   if (err) throw err;
-// //   console.log(process.env.DB_DATABASE);
-//   console.log("MySql Connected");
-// });
-// module.exports = db;
+db.connect((err) => {
+  if (err) throw err;
+//   console.log(process.env.DB_DATABASE);
+  console.log("MySql Connected");
+});
+module.exports = db;
