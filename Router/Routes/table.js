@@ -2,7 +2,11 @@ module.exports = {
 
   addnewrow: (req, res) => {
     let tablename = req.body.tablename;
-    let query = `DESCRIBE ${tablename};`;
+    let tableid = req.body.tableid;
+    let noc = req.body.noc;
+    let pkey = req.body.pkey;
+    let query = `DESCRIBE ${tableid};`;
+    let user_name = req.user.name;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
@@ -13,13 +17,19 @@ module.exports = {
         message: "",
         tableheader: result,
         tname: tablename,
+        tid : tableid,
+        tnoc : noc,
+        tpkey : pkey,
       });
     });
   },
-  verifynewrow: (req, res) => {
+  verifynewrow: (req, res,next) => {
     let tablename = req.body.tablename;
+    let tableid = req.body.tableid;
+    let noc = req.body.noc;
+    let pkey = req.body.pkey;
     let user_name = req.user.name;
-    query = `DESCRIBE ${tablename};`;
+    query = `DESCRIBE ${tableid};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
@@ -27,7 +37,7 @@ module.exports = {
       }
 
       let i = 1;
-      query = `INSERT INTO ${tablename} (`;
+      query = `INSERT INTO ${tableid} (`;
       result.forEach((header, index) => {
         query = query + ` ${header.Field} ,`
       });
@@ -51,7 +61,7 @@ module.exports = {
           console.log(err)
           res.redirect('/mytable');
         }
-        res.redirect('/mytable');
+        next();
       });
 
     });
@@ -60,16 +70,19 @@ module.exports = {
 
   editrow: (req, res) => {
     let tablename = req.body.tablename;
+    let tableid = req.body.tableid;
+    let noc = req.body.noc;
+    let pkey = req.body.pkey;
     let primarykey = req.body.primary_key;
     let primaryvalue = req.body.primary_value;
     let user_name = req.user.name;
-    let query = `DESCRIBE ${tablename};`;
+    query = `DESCRIBE ${tableid};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
       }
       let header = result;
-      query = `SELECT * FROM ${tablename} WHERE ${primarykey} = "${primaryvalue}"`
+      query = `SELECT * FROM ${tableid} WHERE ${primarykey} = "${primaryvalue}"`
       db.query(query, (err, result) => {
         if (err) {
           console.log(err)
@@ -82,6 +95,9 @@ module.exports = {
           message: "",
           tableheader: header,
           tname: tablename,
+          tid : tableid,
+          tnoc : noc,
+          tpkey : pkey,
           row: result,
           prikey:primarykey,
           prival:primaryvalue,
@@ -89,19 +105,22 @@ module.exports = {
       });
     });
   },
-  verifyedit: (req, res) => {
+  verifyedit: (req, res,next) => {
     let tablename = req.body.tablename;
+    let tableid = req.body.tableid;
+    let noc = req.body.noc;
+    let pkey = req.body.pkey;
     let user_name = req.user.name;
     let primarykey = req.body.primary_key;
     let primaryvalue = req.body.primary_value;
 
-    query = `DESCRIBE ${tablename};`;
+    query = `DESCRIBE ${tableid};`;
     db.query(query, (err, result) => {
       if (err) {
         console.log(err)
       }
 
-      query = `UPDATE ${tablename}  SET `;
+      query = `UPDATE ${tableid}  SET `;
       
       result.forEach((header, index) => {
         query = query + `${header.Field} = "${req.body[header.Field]}",`
@@ -116,10 +135,28 @@ module.exports = {
           console.log(err)
           res.redirect('/mytable');
         }
-        res.redirect('/mytable');
+        next()
+        
       });
 
     });
   },
+  delererow: (req, res,next) => {
+    let tablename = req.body.tablename;
+    let tableid = req.body.tableid;
+    let noc = req.body.noc;
+    let pkey = req.body.pkey;
+    let user_name = req.user.name;
+    let primarykey = req.body.primary_key;
+    let primaryvalue = req.body.primary_value;
 
+    query = `DELETE FROM ${tableid} WHERE ${primarykey} = "${primaryvalue}" ;`;
+      db.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+        next();
+      });
+  
+  },
 };

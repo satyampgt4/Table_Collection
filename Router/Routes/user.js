@@ -12,7 +12,7 @@ module.exports = {
     showalltable: (req, res) => {
         
         let email = req.user.email;
-        let query = `SELECT tablename FROM manager WHERE email="${email}";`;
+        let query = `SELECT * FROM table___map___manager WHERE email="${email}";`;
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
@@ -31,8 +31,12 @@ module.exports = {
     showtable: (req, res) => {
         
         let tablename = req.body.tablename;
+        let tableid = req.body.tableid;
+        let noc = req.body.noc;
+        let pkey = req.body.pkey;
+        let user_name = req.user.name;
         // console.log(tablename);
-        let query = `DESCRIBE ${tablename};`;
+        let query = `DESCRIBE ${tableid};`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
@@ -41,7 +45,7 @@ module.exports = {
             // console.log(result);
             header = result;
         });
-         query = `SELECT *  FROM  ${tablename};`;
+         query = `SELECT *  FROM  ${tableid};`;
         db.query(query, (err, result) => {
             if (err) {
               console.log(err)
@@ -54,15 +58,22 @@ module.exports = {
                 user : req.user.name,
                 message : "",
                 table : result,
-                tableheader : header,
+                tableheader: header,
                 tname: tablename,
+                tid : tableid,
+                tnoc : noc,
+                tpkey : pkey,
                 
               });
         });
     },
     filter : (req, res) => {
-      let tablename = req.body.tablename;
-      let query = `DESCRIBE ${tablename};`;
+        let tablename = req.body.tablename;
+        let tableid = req.body.tableid;
+        let noc = req.body.noc;
+        let pkey = req.body.pkey;
+        let user_name = req.user.name;
+      let query = `DESCRIBE ${tableid};`;
       // console.log(tablename);
       db.query(query, (err, result) => {
         if (err) {
@@ -74,15 +85,22 @@ module.exports = {
           message: "",
           tableheader: result,
           tname: tablename,
+          tid : tableid,
+          tnoc : noc,
+          tpkey : pkey,
+          
         });
 
       });
     },
     showfilter: (req, res) => {
       let tablename = req.body.tablename;
+      let tableid = req.body.tableid;
+      let noc = req.body.noc;
+      let pkey = req.body.pkey;
       let user_name = req.user.name;
       console.log(req.body);
-      let query = `DESCRIBE ${tablename};`;
+      let query = `DESCRIBE ${tableid};`;
         let header = {};
         db.query(query, (err, result) => {
             if (err) {
@@ -92,7 +110,7 @@ module.exports = {
             header = result;       
   
         let i = 1;
-        query = `SELECT * FROM ${tablename} WHERE`;
+        query = `SELECT * FROM ${tableid} WHERE`;
       let obj = req.body;
       // console.log(object["strop"]);
         result.forEach((header, index) => {
@@ -173,9 +191,36 @@ module.exports = {
                 table : result,
                 tableheader : header,
                 tname: tablename,
+                tid : tableid,
+                tnoc : noc,
+                tpkey : pkey,
+                
                 
               });
         });
+      });
+    },
+    deletetable: (req, res,next) => {
+      let tablename = req.body.tablename;
+      let tableid = req.body.tableid;
+      let noc = req.body.noc;
+      let pkey = req.body.pkey;
+      let user_name = req.user.name;
+      let primarykey = req.body.primary_key;
+      let primaryvalue = req.body.primary_value;
+  
+      query = `DROP TABLE ${tableid};`;
+      db.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+      query = `DELETE FROM table___map___manager WHERE tableid = "${tableid}" ;`;
+      db.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+        res.redirect('/mytable');
       });
       
     },

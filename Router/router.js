@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require('express-session');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 // const getAuth = require("firebase/auth").getAuth;
 // const signOut = require("firebase/auth").signOut
 // firebase.initializeApp(config);
@@ -21,10 +21,10 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-const { dashboard,showalltable,showtable,filter,showfilter } = require("./Routes/user");
+const { dashboard,showalltable,showtable,filter,showfilter,deletetable } = require("./Routes/user");
 const  {login,logout} = require("./Routes/auth")
-const { frametable,createtable,generatetable } = require("./Routes/newtable");
-const  {addnewrow,verifynewrow,editrow,verifyedit} = require("./Routes/table");
+const { frametable,createtable,generatetable} = require("./Routes/newtable");
+const  {addnewrow,verifynewrow,editrow,verifyedit,delererow} = require("./Routes/table");
 // routes for the app
 
 
@@ -41,20 +41,23 @@ app.get("/", login);
 app.get("/dashboard",checkAuthenticated, dashboard);
 app.get("/createtable",checkAuthenticated, createtable);
 app.get("/mytable",checkAuthenticated, showalltable);
-app.get('/logout',logout)
+app.get('/logout',login)
 
 
 
 
-app.post('/addnewrow',checkAuthenticated,addnewrow);
-app.post('/verifynewrow',checkAuthenticated,verifynewrow);
 app.post("/createtable",checkAuthenticated,frametable);
+app.post("/frametable",checkAuthenticated,generatetable);
 app.post("/mytable",checkAuthenticated,showtable);
 app.post("/filter",checkAuthenticated,filter);
-app.post("/frametable",checkAuthenticated,generatetable);
-app.post("/edit",checkAuthenticated,editrow);
-app.post("/verifyedit",checkAuthenticated,verifyedit);
 app.post("/showfilter",checkAuthenticated,showfilter);
+app.post("/deletetable",checkAuthenticated,deletetable);
+
+app.post('/addnewrow',checkAuthenticated,addnewrow);
+app.post('/verifynewrow',checkAuthenticated,verifynewrow,showtable);
+app.post("/edit",checkAuthenticated,editrow);
+app.post("/verifyedit",checkAuthenticated,verifyedit,showtable);
+app.post("/deleterow",checkAuthenticated,delererow,showtable);
     
   
   

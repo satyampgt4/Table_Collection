@@ -3,7 +3,7 @@
         <div class="form-row justify-content-between">
             <h1>Show All</h1>
             <div class="form-group col-md-1">
-                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+                <a href="/mytable" class="btn btn-primary btn-block">Back</a>
             </div>
         </div>
     </div>
@@ -21,25 +21,38 @@
                             </th>
                 </tr>
             </thead>
+            <% if(table.length==0) { %>
+                <div class="container row d-flex justify-content-center">
+                    <div style="font-size: 30px;">
+                No Data Found Please Add New Row
+                </div>
+            </div> 
+                <% } %>
             <tbody>
                 <% table.forEach((table, index)=> { %>
                     <tr>
                         <form class="form-group col-md-10" action="/edit" method="POST">
                             <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
                                 style="display: none;" hidden>
+                            <input type="text" class="form-control " name="tableid" id="acnoi" value="<%= tid %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="noc" id="acnoi" value="<%= tnoc %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
+                                style="display: none;" hidden>
                             <% tableheader.forEach((header, index)=> { %>
                                 <td scope="row">
 
                                     <% if(index==0) {%>
                                         <input type="text" class="form-control " name="primary_key"
-                                            value="<%= header.Field %>" style="display: none;" hidden >
+                                            value="<%= header.Field %>" style="display: none;" hidden>
                                         <input type="text" class="<%= header.Field %>" name="primary_value"
-                                            value="<%= table[header.Field] %>" style="display: none;" hidden >
-                                         <% } %>
+                                            value="<%= table[header.Field] %>" style="display: none;" hidden>
+                                        <% } %>
                                             <input type="text" class="<%= header.Field %>" name="<%= header.Field %>"
                                                 id="acnoi" value="<%= table[header.Field] %>" disabled
                                                 title="use edit button to edit.">
-                                           
+
                                 </td>
                                 <% }) %>
                                     <td>
@@ -55,15 +68,38 @@
         </table>
         <div class="container">
             <div class="form-row justify-content-between">
-                <form class="form-group  " action="/addnewrow" method="POST">
+                <form class="form-group  " action="/addnewrow"  method="POST">
                     <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
                         style="display: none;" hidden>
-                    <button type="submit" class=" my-table btn btn-sm btn-success btn-block">+Add New Row</button>
+                    <input type="text" class="form-control " name="tableid" id="acnoi" value="<%= tid %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="noc" id="acnoi" value="<%= tnoc %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
+                        style="display: none;" hidden>
+                    <button type="submit"  class=" my-table btn btn-sm btn-success btn-block">+Add New Row</button>
                 </form>
-                <form class="form-group  " action="/filter" method="POST">
+                <form class="form-group" action="/filter" method="POST">
                     <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
                         style="display: none;" hidden>
-                    <button type="submit" class=" my-table btn btn-sm btn-success btn-block">Filter</button>
+                    <input type="text" class="form-control " name="tableid" id="acnoi" value="<%= tid %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="noc" id="acnoi" value="<%= tnoc %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
+                        style="display: none;" hidden>
+                    <button type="submit"  class=" my-table btn btn-sm btn-success btn-block">Filter</button>
+                </form>
+                <form class="form-group" action="/deletetable" method="POST">
+                    <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="tableid" id="acnoi" value="<%= tid %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="noc" id="acnoi" value="<%= tnoc %>"
+                        style="display: none;" hidden>
+                    <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
+                        style="display: none;" hidden>
+                    <button type="submit"  class=" my-table btn btn-sm btn-danger btn-block">Delete Table</button>
                 </form>
             </div>
         </div>

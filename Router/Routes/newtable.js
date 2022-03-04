@@ -18,9 +18,9 @@ module.exports = {
     },
     frametable: (req, res) => {
 
-        const noc = req.body.nofcolumn;
+        let noc = req.body.nofcolumn;
         let name = req.body.nameoftable;
-        name = replaceAll(name," ", "_");
+        // name = replaceAll(name," ", "_");
         res.render("frametable.ejs", {
             title: "Welcome to Table Collection",
             user: req.user.name,
@@ -33,18 +33,26 @@ module.exports = {
     generatetable: (req, res) => {
 
 
-        let query = `CREATE TABLE ${req.body.nameoftable} (`;
+        let name = req.body.nameoftable;
+        let noc = req.body.nofcolumn;
 
-        for (let i = 1; i <= req.body.nofcolumn; i++) {
+        let nameid = "t_" + replaceAll(name," ", "_") +`_${req.user.email}`;
+        nameid = replaceAll(nameid,"@", "_");
+        nameid = replaceAll(nameid,".", "_");
+        
+
+        let query = `CREATE TABLE ${nameid} (`;
+
+        for (let i = 1; i <= noc; i++) {
             let s = `colname${i}`;
             let r = `coltype${i}`;
             let head = `${req.body[s]}`;
-            head = replaceAll(head," ", "_");
+            head = replaceAll(head," ", "_")+"_";
             query = query + ` ${head}  ${req.body[r]} ,`;
             
         }
             head = `${req.body["colname1"]}`;
-            head = replaceAll(head," ", "_");
+            head = replaceAll(head," ", "_")+"_";
         query = query + `PRIMARY KEY ( ${head}));`;
 
         db.query(query, (err, result) => {
@@ -52,7 +60,7 @@ module.exports = {
                 return res.status(200).send(err);
             }
             // console.log(result);
-            query = `INSERT INTO manager (email, tablename) VALUES ("${req.user.email}", "${req.body.nameoftable}" );`;
+            query = `INSERT INTO table___map___manager (email, tablename,tableid,noc,pkey) VALUES ("${req.user.email}", "${req.body.nameoftable}","${nameid}","${noc}","${head}" );`;
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(200).send(err);
@@ -65,18 +73,4 @@ module.exports = {
 
 
     },
-    // addnewrow: (req, res) => {
-    //     let tablename = req.body.tablename;
-    //     // console.log(tablename);
-    //     let query = `DESCRIBE ${tablename};`;
-    //     let header = {};
-    //     db.query(query, (err, result) => {
-    //         if (err) {
-    //             console.log(err)
-    //         }
-    //         // console.log(result);
-    //         header = result;
-    //     });
-    // },
-
 };
