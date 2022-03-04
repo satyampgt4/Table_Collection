@@ -7,12 +7,25 @@
             </div>
         </div>
     </div>
+    <% if(tables.length ==0) { %>
+        <div class="container row d-flex justify-content-center">
+            <div style="font-size: 30px;">
+        No Table Found Please Create New table 
+            </div>
+        </div>
+        <% } %>
     <div class="table-wrapper row  justify-content-center">
         <div class="table-wrapper ">
             <% tables.forEach((table, index)=> { %>
                 <form class="form-group col-md-10 " action="" method="POST">
-                    <input type="text" class="form-control " name="tablename" id="acnoi"
+                        <input type="text" class="form-control " name="tablename" id="acnoi"
                         value="<%= table.tablename %>" style="display: none;" hidden>
+                        <input type="text" class="form-control " name="tableid" id="acnoi"
+                        value="<%= table.tableid %>" style="display: none;" hidden>
+                        <input type="text" class="form-control " name="noc" id="acnoi"
+                        value="<%= table.noc %>" style="display: none;" hidden>
+                        <input type="text" class="form-control " name="pkey" id="acnoi"
+                        value="<%= table.pkey %>" style="display: none;" hidden>
                     <button type="submit" class=" my-table btn btn-sm btn-success btn-block"><%= table.tablename %></button>
                 </form>
                 <% }) %>
