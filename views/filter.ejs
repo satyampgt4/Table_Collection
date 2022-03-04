@@ -5,7 +5,7 @@
         <div class="form-row justify-content-between">
             <h1>Filter</h1>
             <div class="form-group col-md-1">
-                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+                <a href="/mytable" class="btn btn-primary btn-block">Back</a>
             </div>
         </div>
 
@@ -13,34 +13,14 @@
             <% tableheader.forEach((header, index)=> { %>
 
                 <% if (header.Type !="date" ) {%>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="first-name">
-                            <%= header.Field %>
-                    </div>
-                    <% } %>
-
-                    <% if (header.Type=="varchar(50)" ) {%>
+                    <div class="form-row">
                         <div class="form-group col-md-4">
-                            <select id="<%= header.Field %>" name="<%= header.Field %>op" class="form-control"
-                                placeholder="Choose Type">
-                                <option selected value="">Choose Type</option>
-                                <option value="iseq">is eq</option>
-                                <option value="noteq">not eq</option>
-                                <option value="startswith">starts with</option>
-                                <option value="endwith">end with</option>
-                                <option value="contain">contain</option>
-                                <option value="notcontain">does not contain</option>
-                                <option value="null">null</option>
-                                <option value="notnull">not null</option>
-                            </select>
+                            <label for="first-name">
+                                <%= header.Field %>
                         </div>
-                        <div class="form-group col-md-4">
+                        <% } %>
 
-                            <input type="text" class="form-control" name="<%= header.Field %>" id="<%= header.Field %>"
-                                placeholder="<%= header.Field %>">
-
-                            <% } else if (header.Type=="varchar(51)" ) {%>
+                            <% if (header.Type=="varchar(50)" ) {%>
                                 <div class="form-group col-md-4">
                                     <select id="<%= header.Field %>" name="<%= header.Field %>op" class="form-control"
                                         placeholder="Choose Type">
@@ -59,46 +39,75 @@
 
                                     <input type="text" class="form-control" name="<%= header.Field %>"
                                         id="<%= header.Field %>" placeholder="<%= header.Field %>">
-                                    <% } else if (header.Type=="tinyint(1)" ) {%>
+
+                                    <% } else if (header.Type=="varchar(51)" ) {%>
                                         <div class="form-group col-md-4">
                                             <select id="<%= header.Field %>" name="<%= header.Field %>op"
                                                 class="form-control" placeholder="Choose Type">
-                                                <option value="" selected>Choose Type</option>
-                                                <option value="true">true</option>
-                                                <option value="false">false</option>
+                                                <option selected value="">Choose Type</option>
+                                                <option value="iseq">is eq</option>
+                                                <option value="noteq">not eq</option>
+                                                <option value="startswith">starts with</option>
+                                                <option value="endwith">end with</option>
+                                                <option value="contain">contain</option>
+                                                <option value="notcontain">does not contain</option>
+                                                <option value="null">null</option>
+                                                <option value="notnull">not null</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <% } else if (header.Type=="bigint" ) {%>
+
+                                            <input type="text" class="form-control" name="<%= header.Field %>"
+                                                id="<%= header.Field %>" placeholder="<%= header.Field %>">
+                                            <% } else if (header.Type=="tinyint(1)" ) {%>
                                                 <div class="form-group col-md-4">
                                                     <select id="<%= header.Field %>" name="<%= header.Field %>op"
                                                         class="form-control" placeholder="Choose Type">
-                                                        <option selected value= "">Choose Type</option>
-                                                        <option value="greater">greater then</option>
-                                                        <option value="lesser">less then</option>
-                                                        <option value="equal">is eq</option>
-                                                        <option value="notequal">not eq</option>
-                                                        <option value="null">null</option>
-                                                        <option value="notnull">not null</option>
+                                                        <option value="" selected>Choose Type</option>
+                                                        <option value="true">True</option>
+                                                        <option value="false">False</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-4">
+                                                    <% } else if (header.Type=="bigint" ) {%>
+                                                        <div class="form-group col-md-4">
+                                                            <select id="<%= header.Field %>"
+                                                                name="<%= header.Field %>op" class="form-control"
+                                                                placeholder="Choose Type">
+                                                                <option selected value="">Choose Type</option>
+                                                                <option value="greater">greater then</option>
+                                                                <option value="lesser">less then</option>
+                                                                <option value="equal">is eq</option>
+                                                                <option value="notequal">not eq</option>
+                                                                <option value="null">null</option>
+                                                                <option value="notnull">not null</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
 
-                                                    <input type="number" class="form-control" name="<%= header.Field %>"
-                                                        int="<%= header.Field %>" placeholder="<%= header.Field %>">
-                                                
-                                                <% } else if (header.Type=="date" ) {%>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                        <% }); %>
-                                            <input type="text" class="form-control " name="tablename"
-                                                value="<%= tname %>" style="display: none;" hidden>
-                                            <div class="form-row mb-md-4 justify-content-between">
-                                                <button type="reset" class="btn btn-primary float-left">Reset</button>
-                                                <button type="submit" class="btn btn-primary float-right"
-                                                    action = "/showfilter">Filter</button>
-                                            </div>
+                                                            <input type="number" class="form-control"
+                                                                name="<%= header.Field %>" int="<%= header.Field %>"
+                                                                placeholder="<%= header.Field %>">
+
+                                                            <% } else if (header.Type=="date" ) {%>
+                                                                <% } %>
+                                                        </div>
+                                                </div>
+                                                <% }); %>
+                                                    <input type="text" class="form-control " name="tablename" id="acnoi"
+                                                        value="<%= tname %>" style="display: none;" hidden>
+                                                    <input type="text" class="form-control " name="tableid" id="acnoi"
+                                                        value="<%= tid %>" style="display: none;" hidden>
+                                                    <input type="text" class="form-control " name="noc" id="acnoi"
+                                                        value="<%= tnoc %>" style="display: none;" hidden>
+                                                    <input type="text" class="form-control " name="pkey" id="acnoi"
+                                                        value="<%= tpkey %>" style="display: none;" hidden>
+                                                    <div class="form-row mb-md-4 justify-content-between">
+                                                        <button type="reset"
+                                                            class="btn btn-primary float-left">Reset</button>
+                                                        <button type="submit" class="btn btn-primary float-right"
+                                                            action="/showfilter">Filter</button>
+                                                    </div>
 
         </form>
     </div>
