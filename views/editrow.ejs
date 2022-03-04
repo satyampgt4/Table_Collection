@@ -5,7 +5,7 @@
         <div class="form-row justify-content-between">
             <h1>Edit Row</h1>
             <div class="form-group col-md-1">
-                <a href="/dashboard" class="btn btn-primary btn-block">Back</a>
+                <a href="/mytable" class="btn btn-primary btn-block">Back</a>
             </div>
         </div>
         <% row.forEach((rowval, index)=> { %>
@@ -28,9 +28,12 @@
                                         <input type="date" class="form-control" name="<%= header.Field %>"
                                             id="<%= header.Field %>" placeholder="<%= header.Field %>" required>
                                         <% } else if (header.Type=="tinyint(1)" ) {%>
-                                            <input type="number" class="form-control" name="<%= header.Field %>" min="0"
-                                                max="1" id="<%= header.Field %>" placeholder="<%= header.Field %>"
-                                                value="<%= rowval[header.Field] %>" required>
+                                            <select id="<%= header.Field %>" name="<%= header.Field %>" class="form-control"
+                                                placeholder="<%= header.Field %>"  value="<%= rowval[header.Field] %>" %> required>
+                                                <option disabled>Choose Type</option>
+                                                <option value="1">True</option>
+                                                <option value="0">False</option>
+                                            </select>
                                             <% } else if (header.Type=="bigint" ) {%>
                                                 <input type="number" class="form-control" name="<%= header.Field %>"
                                                     int="<%= header.Field %>" placeholder="<%= header.Field %>"
@@ -40,15 +43,22 @@
                     </div>
                     <% }); %>
                         <% }); %>
-                            <input type="text" class="form-control " name="tablename" action="/verifyedit"
-                                value="<%= tname %>" style="display: none;" hidden>
-                            <input type="text" class="form-control " name="primary_key" action="/verifyedit"
-                                value="<%= prikey %>" style="display: none;" hidden>
-                            <input type="text" class="form-control " name="primary_value" action="/verifyedit"
-                                value="<%= prival %>" style="display: none;" hidden>
+                            <input type="text" class="form-control " name="tablename" id="acnoi" value="<%= tname %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="tableid" id="acnoi" value="<%= tid %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="noc" id="acnoi" value="<%= tnoc %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="primary_key" value="<%= prikey %>"
+                                style="display: none;" hidden>
+                            <input type="text" class="form-control " name="primary_value" value="<%= prival %>"
+                                style="display: none;" hidden>
                             <div class="form-row mb-md-4 justify-content-between">
                                 <button type="reset" class="btn btn-primary float-left">Reset</button>
-                                <button type="submit" class="btn btn-primary float-right" action>Edit Row</button>
+                                <button type="submit" class="btn btn-primary float-right" formaction = "/verifyedit">Edit Row</button>
+                                <button type="submit" class="btn btn-danger float-right" formaction = "/deleterow">Delete</button>
                             </div>
 
             </form>
