@@ -5,9 +5,9 @@ module.exports = {
         res.render("dashboard.ejs", {
             title: "Welcome to Table Collection View Account",
             user : req.user.name,
+            userimg : req.user.picture,
             message : ""
-          });
-        
+          });        
     },
     showalltable: (req, res) => {
         
@@ -22,6 +22,7 @@ module.exports = {
               title: "Welcome to Table Collection View Account",
               tables: result,
               user: req.user.name,
+              userimg : req.user.picture,
               message: "",
   
             });
@@ -56,6 +57,7 @@ module.exports = {
             res.render("showtable.ejs", {
                 title: "Welcome to Table collection",
                 user : req.user.name,
+                userimg : req.user.picture,
                 message : "",
                 table : result,
                 tableheader: header,
@@ -82,6 +84,7 @@ module.exports = {
         res.render("filter.ejs", {
           title: "Welcome to Table collection",
           user: req.user.name,
+          userimg : req.user.picture,
           message: "",
           tableheader: result,
           tname: tablename,
@@ -187,6 +190,7 @@ module.exports = {
             res.render("showtable.ejs", {
                 title: "Welcome to Table collection",
                 user : req.user.name,
+                userimg : req.user.picture,
                 message : "",
                 table : result,
                 tableheader : header,

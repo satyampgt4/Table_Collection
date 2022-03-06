@@ -13,6 +13,7 @@ module.exports = {
         res.render("createtable.ejs", {
             title: "Welcome to Table Collection",
             user: req.user.name,
+            userimg : req.user.picture,
             message: "",
         });
     },
@@ -24,6 +25,7 @@ module.exports = {
         res.render("frametable.ejs", {
             title: "Welcome to Table Collection",
             user: req.user.name,
+            userimg : req.user.picture,
             message: "",
             noOfColumn: noc,
             name: name,

@@ -14,6 +14,7 @@ module.exports = {
       res.render("addnewrow.ejs", {
         title: "Welcome to Table collection",
         user: req.user.name,
+        userimg : req.user.picture,
         message: "",
         tableheader: result,
         tname: tablename,
@@ -92,6 +93,7 @@ module.exports = {
         res.render("editrow.ejs", {
           title: "Welcome to Table collection",
           user: user_name,
+          userimg : req.user.picture,
           message: "",
           tableheader: header,
           tname: tablename,
