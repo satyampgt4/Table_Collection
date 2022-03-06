@@ -36,6 +36,22 @@
     padding: 40px;
     margin-bottom: 100px;
     font-size: 20px;
+    width: 281px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    background-color: rgb(rgb(255, 255, 255), green, blue);
+  }
+  .dash-button{
+     font-size: 98px;
+    display: block;
+    margin: auto;
+    height: 140px;
+    width: 140px;
+    border-radius: 70px;
+    padding: 22px;
+    margin-top: 14px;
+    background-color: rgb(99 176 117 / 53%);
   }
 
   .add-account-form {
@@ -61,7 +77,13 @@
   .edit {
     margin-top: 18px;
   }
-
+  img{
+    vertical-align: middle;
+    border-style: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+  }
   body {
     overflow-x: hidden;
     min-height: 100%;
@@ -69,11 +91,15 @@
 </style>
 
 <body>
+  <div style="min-height:92vh">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between mb-md-5">
     <a class="navbar-brand" href="/">Table Collection</a>
     <ul class="navbar-nav">
       <!-- Dropdown -->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown row">
+        <% if (user!='Guest' ) { %>
+        <img src="<%= userimg %>" alt="profile image">
+        <% } %>
         <p class="nav-link dropdown-toggle mr-md-5" data-toggle="dropdown">
           <%= user %>
         </p>
