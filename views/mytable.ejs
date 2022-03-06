@@ -8,11 +8,15 @@
         </div>
     </div>
     <% if(tables.length ==0) { %>
-        <div class="container row d-flex justify-content-center">
-            <div style="font-size: 30px;">
+        <div class=" nodata container row d-flex justify-content-center">
+            <div >
         No Table Found Please Create New table 
             </div>
         </div>
+        <div class="row align-items-start justify-content-center">
+            <div class="col-5">
+                <a href="/createtable/" class=" btn btn-block btn-success">Create New Table <i class="fas fa-regular fa-solid fa-plus" ></i></i></a>
+            </div>
         <% } %>
     <div class="table-wrapper row  justify-content-center">
         <div class="table-wrapper ">

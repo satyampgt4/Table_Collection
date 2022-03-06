@@ -21,13 +21,6 @@
                             </th>
                 </tr>
             </thead>
-            <% if(table.length==0) { %>
-                <div class="container row d-flex justify-content-center">
-                    <div style="font-size: 30px;">
-                No Data Found Please Add New Row
-                </div>
-            </div> 
-                <% } %>
             <tbody>
                 <% table.forEach((table, index)=> { %>
                     <tr>
@@ -66,6 +59,15 @@
                     <% }) %>
             </tbody>
         </table>
+    </div> 
+        <% if(table.length==0) { %>
+            <div class=" nodata container row d-flex justify-content-center">
+                <div >
+            No Data Found Please Add New Row
+            </div>
+            <% } %>
+            </div>
+    
         <div class="container">
             <div class="form-row justify-content-between">
                 <form class="form-group  " action="/addnewrow"  method="POST">
