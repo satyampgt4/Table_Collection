@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="table-wrapper">
-        <table class="table table-hovered">
+        <table class="table table-hovered showtable">
             <thead class="thead-dark">
                 <tr>
                     <% tableheader.forEach((header, index)=> { %>
@@ -34,7 +34,7 @@
                             <input type="text" class="form-control " name="pkey" id="acnoi" value="<%= tpkey %>"
                                 style="display: none;" hidden>
                             <% tableheader.forEach((header, index)=> { %>
-                                <td scope="row">
+                                <td scope="row" class="tablecell">
 
                                     <% if(index==0) {%>
                                         <input type="text" class="form-control " name="primary_key"
@@ -42,15 +42,18 @@
                                         <input type="text" class="<%= header.Field %>" name="primary_value"
                                             value="<%= table[header.Field] %>" style="display: none;" hidden>
                                         <% } %>
-                                            <input type="text" class="<%= header.Field %>" name="<%= header.Field %>"
+                                            <!-- <input type="text" class="<%= header.Field %>" name="<%= header.Field %>"
                                                 id="acnoi" value="<%= table[header.Field] %>" disabled
-                                                title="use edit button to edit.">
+                                                title="use edit button to edit."> -->
+                                            <div>
+                                                <%= table[header.Field]%>
+                                            </div>
 
                                 </td>
                                 <% }) %>
                                     <td>
                                         <button type="submit"
-                                            class=" edit btn btn-sm btn-success btn-block">Edit</button>
+                                            class=" edit btn btn-sm btn-success btn-block tablecell">Edit</button>
                                     </td>
                         </form>
                         </td>
@@ -65,8 +68,9 @@
                 <div >
             No Data Found Please Add New Row
             </div>
+        </div>
             <% } %>
-            </div>
+            
     
         <div class="container">
             <div class="form-row justify-content-between">
