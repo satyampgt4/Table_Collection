@@ -86,6 +86,8 @@ function checkAuthenticated(req, res, next){
       user.email = payload.email;
       user.picture = payload.picture;
     }
+    // await 
+    new Promise(resolve => setTimeout(resolve, 500));
     verify()
     .then(()=>{
         req.user = user;
