@@ -9,7 +9,8 @@ module.exports = {
 
   },
   logout: (req, res) => {
-
+    
+    new Promise(resolve => setTimeout(resolve, 1500));
     res.clearCookie('session-token');
     res.redirect('/login');
   },

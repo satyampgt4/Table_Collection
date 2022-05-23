@@ -1,14 +1,12 @@
 const express = require("express");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-// const getAuth = require("firebase/auth").getAuth;
-// const signOut = require("firebase/auth").signOut
-// firebase.initializeApp(config);
 
 // google Auth
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = process.env.CLIENT_ID
 const client = new OAuth2Client(CLIENT_ID);
+
 
 const app = express();
 
@@ -41,7 +39,7 @@ app.get("/", login);
 app.get("/dashboard",checkAuthenticated, dashboard);
 app.get("/createtable",checkAuthenticated, createtable);
 app.get("/mytable",checkAuthenticated, showalltable);
-app.get('/logout',login)
+app.get('/logout',logout)
 
 
 
